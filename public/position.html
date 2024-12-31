@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Location on Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display Location on a Map</h1>
+    <button id="getLocationButton">Show My Location</button>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([0, 0], 13); // Default view before location is set
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker variable to update the user's position
+        let marker;
+
+        // Get the user's location
+        document.getElementById('getLocationButton').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+
+                        // Update the map view to the user's location
+                        map.setView([latitude, longitude], 13);
+
+                        // Add or move the marker to the user's location
+                        if (marker) {
+                            marker.setLatLng([latitude, longitude]);
+                        } else {
+                            marker = L.marker([latitude, longitude]).addTo(map);
+                        }
+
+                        marker.bindPopup(`You are here!<br>Latitude: ${latitude}<br>Longitude: ${longitude}`).openPopup();
+                    },
+                    (error) => {
+                        alert("Unable to retrieve your location. Please ensure location services are enabled.");
+                        console.error(error);
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        });
+    </script>
+</body>
+</html>

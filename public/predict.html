@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Optional for icons -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Please Provide the information needed to protect you 📋</h1>
+    <form id="crimeForm">
+        <!-- Collecting gender with radio buttons -->
+        
+        <div class="form-group">
+            <label for="gender">Gender 👤:</label>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+        </div>
+
+        <!-- Collecting race with a select box -->
+        <div class="form-group">
+            <label for="race">Race 🌍:</label>
+            <select name="race" id="race" required>
+                <option value="WHITE">WHITE</option>
+                <option value="WHITE HISPANIC">WHITE HISPANIC</option>
+                <option value="BLACK">BLACK</option>
+                <option value="ASIAN / PACIFIC ISLANDER">ASIAN / PACIFIC ISLANDER</option>
+                <option value="BLACK HISPANIC">BLACK HISPANIC</option>
+                <option value="AMERICAN INDIAN/ALASKAN NATIVE">AMERICAN INDIAN/ALASKAN NATIVE</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+        </div>
+
+        <!-- Collecting age with a slider -->
+        <div class="form-group">
+            <label for="age">Age 🧑‍🦳:</label>
+            <input type="range" name="age" id="age" min="0" max="120" required>
+            <span id="ageValue">Age: 0</span>
+        </div>
+
+        <!-- Collecting date using date input -->
+        <div class="form-group">
+            <label for="date">Date 🗓️:</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+
+        <!-- Collecting time using time input widget -->
+        <div class="form-group">
+            <label for="time">Hour 🕒:</label>
+            <input type="time" name="time" id="time" required>
+        </div>
+
+        <!-- Collecting place with radio buttons -->
+        <div class="form-group">
+            <label for="place">Place 📍:</label>
+            <input type="radio" name="place" value="In park" required> In park
+            <input type="radio" name="place" value="In public housing" required> In public housing
+            <input type="radio" name="place" value="In station" required> In station
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-group">
+            <button type="submit">Submit 📝</button>
+        </div>
+    </form>
+
+    <div id="response">
+        <p>Prediction: A Sexual Crime is likely to happen based on the conditions you have provided.Please be careful!</p>
+    </div>
+
+    <script>
+        // Display age value in real-time when slider is moved
+        const ageSlider = document.getElementById("age");
+        const ageValue = document.getElementById("ageValue");
+        ageSlider.addEventListener("input", () => {
+            ageValue.textContent = "Age: " + ageSlider.value;
+        });
+
+        // Handle form submission
+        const form = document.getElementById('crimeForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = new FormData(form);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            console.log(formObject);
+            // http://localhost:3000/predict-crime
+            // http://localhost:8000/predict-crime
+            fetch('http://localhost:8000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject) // Send form data as JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show the response from the API
+                const responseDiv = document.getElementById('response');
+                if (data.crimePrediction) {
+                    responseDiv.textContent = `Prediction: A crime of ${data.crimeType} is likely to happen.`;
+                    responseDiv.style.color = 'red';
+                } else {
+                    responseDiv.textContent = `Prediction: No crime expected.`;
+                    responseDiv.style.color = 'green';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    
+    
+    );
+    </script>
+</body>
+</html>
