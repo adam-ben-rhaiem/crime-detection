@@ -11,7 +11,7 @@ This web app predicts the likelihood of crimes in New York City using historical
   - **Crime details:** Type, classification  
 
 ## 💻 Features  
-- **Interactive Map:** Visualize crime predictions.  
+- **Interactive Map:** Allows users to input a location and assess its safety.  
 - **Detailed Results:** Highlights the crime category with the highest probability of occurrence.  
 - **Geolocation Services:** Provides insights based on the user's current location.  
 
