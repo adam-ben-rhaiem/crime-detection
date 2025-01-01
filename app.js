@@ -44,7 +44,8 @@ app.post('/predict', (req, res) => {
       }
       
       // The result is the prediction output from Python
-      return res.json({ prediction: result[0] });
+      // result[0] : highest probability of the crime that will happen!
+      return res.json({ crimePrediction:true, crimeType: result[0] });
     });
 });
   
