@@ -93,7 +93,6 @@
     </form>
 
     <div id="response">
-        <p>Prediction: A Sexual Crime is likely to happen based on the conditions you have provided.Please be careful!</p>
     </div>
 
     <script>
@@ -130,11 +129,8 @@
                 // Show the response from the API
                 const responseDiv = document.getElementById('response');
                 if (data.crimePrediction) {
-                    responseDiv.textContent = `Prediction: A crime of ${data.crimeType} is likely to happen.`;
+                    responseDiv.textContent = `Prediction: A ${data.crimeType} Crime is likely to happen based on the conditions you have provided.Please be careful!`;
                     responseDiv.style.color = 'red';
-                } else {
-                    responseDiv.textContent = `Prediction: No crime expected.`;
-                    responseDiv.style.color = 'green';
                 }
             })
             .catch(error => {
