@@ -37,3 +37,11 @@ This web app analyzes historical crime data to predict the **likelihood of crimi
 - 🧠 **Scikit-learn** – Baseline modeling  
 - 🌲 **LightGBM** – Fast and efficient gradient boosting  
 - 🔥 **XGBoost** – High-performance crime classification
+
+  
+## ▶️ Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/adam--ben-rhaiem/crime-detection.git
+cd crime-detection
