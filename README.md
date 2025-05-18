@@ -1,21 +1,39 @@
-# New York City Crime Prediction Web Application 🚨
+# 🚨 New York City Crime Prediction Web Application 
+An intelligent, map-based web application that leverages machine learning and geospatial data to **predict crime probabilities** in NYC neighborhoods. Whether you're planning a visit or commuting, this tool helps you make **safer decisions, backed by data**.
 
-## Overview  
-This web app predicts the likelihood of crimes in New York City using historical data, helping users identify safe places to visit.  
+## 🌆 Overview
+Explore New York City with confidence.
+
+This web app analyzes historical crime data to predict the **likelihood of criminal activity** in any given area. Just enter a location  or use your real-time coordinates  and get instant insights into **crime categories** most likely to occur nearby.
 
 ## 📊 Dataset  
-- **NYPD Complaint Data (2006–2021)**  
-- **6.9M records** with 35 attributes, including:  
-  - **Temporal:** Date, time  
-  - **Spatial:** Latitude, longitude  
-  - **Crime details:** Type, classification  
+- **Source:** [NYPD Complaint Data (2006–2021)](https://opendata.cityofnewyork.us/)
+- **Size:** 6.9 million+ records
+- **Features:**
+  - 🕒 **Temporal**: Date, time of incident  
+  - 📍 **Spatial**: Latitude, longitude, precincts  
+  - 🧾 **Crime Details**: Offense description, classification
+    
+## ✨ Key Features
 
-## 💻 Features  
-- **Interactive Map:** Allows users to input a location and assess its safety.  
-- **Detailed Results:** Highlights the crime category with the highest probability of occurrence.  
-- **Geolocation Services:** Provides insights based on the user's current location.  
+| Feature                | Description |
+|------------------------|-------------|
+| 🗺️ **Interactive Map** | Visualize predicted crime likelihoods directly on an NYC map. |
+| 📍 **Smart Geolocation** | Automatically assesses your current location's safety. |
+| 🔍 **Detailed Insights** | Reveals the **most probable crime type** in your selected area. |
+| 📈 **Predictive Intelligence** | Uses trained ML models to generate risk probabilities. |
 
-## 🛠️ Technologies  
-- **Backend:** Node.js for web server and APIs.  
-- **Frontend:** OpenStreetMap for map-based visualization.  
-- **Machine Learning:** Scikit-learn, LightGBM, XGBoost.  
+## 🛠️ Tech Stack
+
+**Frontend**  
+- 🗺️ [OpenStreetMap](https://www.openstreetmap.org/) – Live, interactive mapping  
+- 🧪 HTML, CSS, JS – Lightweight and responsive UI
+
+**Backend**  
+- ⚙️ **Node.js** – Fast and scalable server environment  
+- 🌐 **RESTful API** – For predictions and data retrieval
+
+**Machine Learning**  
+- 🧠 **Scikit-learn** – Baseline modeling  
+- 🌲 **LightGBM** – Fast and efficient gradient boosting  
+- 🔥 **XGBoost** – High-performance crime classification
